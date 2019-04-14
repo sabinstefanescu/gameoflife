@@ -1,5 +1,7 @@
-package com.epam.dojo.gameoflife;
+package com.epam.dojo.gameoflife.parsers;
 
+
+import com.epam.dojo.gameoflife.renderer.ConwaysGameOfLife;
 
 import java.awt.Point;
 import java.io.BufferedReader;

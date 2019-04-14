@@ -1,4 +1,6 @@
-package com.epam.dojo.gameoflife;
+package com.epam.dojo.gameoflife.renderer;
+
+import com.epam.dojo.gameoflife.parsers.OpenLifFile;
 
 import javax.swing.*;
 import java.awt.*;
@@ -14,7 +16,7 @@ public class ConwaysGameOfLife extends JFrame implements ActionListener {
     private GameBoard gameBoard;
     private Thread game;
 
-    ConwaysGameOfLife() {
+    public ConwaysGameOfLife() {
         // Setup game board
         gameBoard = new GameBoard();
         add(gameBoard);

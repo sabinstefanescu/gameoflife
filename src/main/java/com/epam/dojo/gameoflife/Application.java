@@ -1,5 +1,7 @@
 package com.epam.dojo.gameoflife;
 
+import com.epam.dojo.gameoflife.renderer.ConwaysGameOfLife;
+
 import javax.swing.*;
 import java.awt.*;
 

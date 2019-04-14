@@ -1,4 +1,6 @@
-package com.epam.dojo.gameoflife;
+package com.epam.dojo.gameoflife.renderer;
+
+import com.epam.dojo.gameoflife.domain.GameOfLifeService;
 
 import javax.swing.*;
 import java.awt.*;
@@ -11,6 +13,8 @@ class GameBoard extends JPanel implements ComponentListener, MouseListener, Mous
     private static final int BLOCK_SIZE = 5;
 
     private Dimension gameBoardSize = null;
+
+    private GameOfLifeService gameOfLifeService = GameOfLifeService.getInstance();
 
     public int getMovesPerSecond() {
         return movesPerSecond;
@@ -140,38 +144,9 @@ class GameBoard extends JPanel implements ComponentListener, MouseListener, Mous
     }
 
     private void tick() {
-        boolean[][] gameBoard = new boolean[gameBoardSize.width+2][gameBoardSize.height+2];
-        for (Point current : point) {
-            gameBoard[current.x+1][current.y+1] = true;
-        }
-        ArrayList<Point> survivingCells = new ArrayList<Point>(0);
-        // Iterate through the array, follow game of life rules
-        for (int i=1; i<gameBoard.length-1; i++) {
-            for (int j=1; j<gameBoard[0].length-1; j++) {
-                int surrounding = 0;
-                if (gameBoard[i-1][j-1]) { surrounding++; }
-                if (gameBoard[i-1][j])   { surrounding++; }
-                if (gameBoard[i-1][j+1]) { surrounding++; }
-                if (gameBoard[i][j-1])   { surrounding++; }
-                if (gameBoard[i][j+1])   { surrounding++; }
-                if (gameBoard[i+1][j-1]) { surrounding++; }
-                if (gameBoard[i+1][j])   { surrounding++; }
-                if (gameBoard[i+1][j+1]) { surrounding++; }
-                if (gameBoard[i][j]) {
-                    // Cell is alive, Can the cell live? (2-3)
-                    if ((surrounding == 2) || (surrounding == 3)) {
-                        survivingCells.add(new Point(i-1,j-1));
-                    }
-                } else {
-                    // Cell is dead, will the cell be given birth? (3)
-                    if (surrounding == 3) {
-                        survivingCells.add(new Point(i-1,j-1));
-                    }
-                }
-            }
-        }
+        List<Point> nextIteration = gameOfLifeService.getNextIteration(point, gameBoardSize);
         resetBoard();
-        point.addAll(survivingCells);
+        point = nextIteration;
         repaint();
     }
 
