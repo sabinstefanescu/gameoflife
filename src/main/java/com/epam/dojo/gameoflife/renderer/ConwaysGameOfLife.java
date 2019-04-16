@@ -8,6 +8,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 
+import static javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED;
+
 public class ConwaysGameOfLife extends JFrame implements ActionListener {
 
     private JMenuItem mi_file_options, mi_file_exit;
@@ -17,9 +19,17 @@ public class ConwaysGameOfLife extends JFrame implements ActionListener {
     private Thread game;
 
     public ConwaysGameOfLife() {
+
         // Setup game board
         gameBoard = new GameBoard();
-        add(gameBoard);
+
+
+        JScrollPane scroller = new JScrollPane(gameBoard);
+        setPreferredSize(new Dimension(450, 110));
+        scroller.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        add(scroller, BorderLayout.CENTER);
+
+        add(scroller);
         // Setup menu
         JMenuBar mb_menu = new JMenuBar();
         setJMenuBar(mb_menu);
