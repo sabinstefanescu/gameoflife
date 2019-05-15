@@ -1,14 +1,10 @@
 package com.epam.dojo.gameoflife.renderer;
 
-import com.epam.dojo.gameoflife.parsers.OpenLifFile;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
-
-import static javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED;
 
 public class ConwaysGameOfLife extends JFrame implements ActionListener {
 
@@ -38,7 +34,7 @@ public class ConwaysGameOfLife extends JFrame implements ActionListener {
         JMenu m_game = new JMenu("Game");
         mb_menu.add(m_game);
         JMenuItem mi_file_open = new JMenuItem("Open");
-        mi_file_open.addActionListener(new OpenLifFile(this));
+        mi_file_open.addActionListener(new OpenLifeFile(this));
         m_file.add(mi_file_open);
         mi_file_options = new JMenuItem("Options");
         mi_file_options.addActionListener(this);

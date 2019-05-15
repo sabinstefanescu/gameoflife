@@ -1,5 +1,6 @@
-package com.epam.dojo.gameoflife.parsers;
+package com.epam.dojo.gameoflife.renderer;
 
+import com.epam.dojo.gameoflife.parsers.ParseLifeFile;
 import com.epam.dojo.gameoflife.renderer.ConwaysGameOfLife;
 
 import javax.swing.*;
@@ -11,10 +12,10 @@ import java.io.IOException;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 
-public class OpenLifFile implements ActionListener {
+public class OpenLifeFile implements ActionListener {
     private final ConwaysGameOfLife gameOfLife;
 
-    public OpenLifFile(ConwaysGameOfLife gameOfLife ) {
+    public OpenLifeFile(ConwaysGameOfLife gameOfLife ) {
         this.gameOfLife = gameOfLife;
     }
 
@@ -27,13 +28,16 @@ public class OpenLifFile implements ActionListener {
         if (returnVal == JFileChooser.APPROVE_OPTION) {
             File file = fc.getSelectedFile();
             Charset charset = Charset.forName("US-ASCII");
-            ParseLifFile parser = new ParseLifFile(this.gameOfLife);
+            ParseLifeFile parser = new ParseLifeFile();
 
             try (BufferedReader reader = Files.newBufferedReader(file.toPath(), charset)) {
-                parser.populateFromReader(reader);
+                InitialState initialState = parser.populateFromReader(reader);
+                this.gameOfLife.setPoints(initialState.points);
+                this.gameOfLife.updateGameSize(initialState.width, initialState.height);
             } catch (IOException x) {
                 System.err.format("IOException: %s%n", x);
             }
+
 
         } else {
             System.out.println("Open command cancelled by user.");
