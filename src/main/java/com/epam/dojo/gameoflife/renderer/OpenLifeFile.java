@@ -2,7 +2,6 @@ package com.epam.dojo.gameoflife.renderer;
 
 import com.epam.dojo.gameoflife.domain.InitialState;
 import com.epam.dojo.gameoflife.services.FileParsingService;
-import com.epam.dojo.gameoflife.services.FileParsingServiceImpl;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
