@@ -14,10 +14,10 @@ import java.util.regex.Pattern;
 
 public class FileParsingServiceImpl implements FileParsingService{
 
-    Pattern containsWidthDeclaration = Pattern.compile("x[ ]?=[ ]?([0-9]+)");
-    Pattern containsHeightDeclaration = Pattern.compile("y[ ]?=[ ]?([0-9]+)");
-    Pattern cellsLine = Pattern.compile("^[ob$0-9!]+$");
-    Pattern cellGroup = Pattern.compile("(([0-9]*)(o))|(([0-9]*)(b))|(\\$)|(!)");
+    private Pattern containsWidthDeclaration = Pattern.compile("x[ ]?=[ ]?([0-9]+)");
+    private Pattern containsHeightDeclaration = Pattern.compile("y[ ]?=[ ]?([0-9]+)");
+    private Pattern cellsLine = Pattern.compile("^[ob$0-9!]+$");
+    private Pattern cellGroup = Pattern.compile("(([0-9]*)(o))|(([0-9]*)(b))|(\\$)|(!)");
 
     @Override
     public InitialState populateFromReader(BufferedReader reader) {
