@@ -1,7 +1,8 @@
 package com.epam.dojo.gameoflife.renderer;
 
-import com.epam.dojo.gameoflife.parsers.ParseLifeFile;
-import com.epam.dojo.gameoflife.renderer.ConwaysGameOfLife;
+import com.epam.dojo.gameoflife.domain.InitialState;
+import com.epam.dojo.gameoflife.services.FileParsingService;
+import com.epam.dojo.gameoflife.services.FileParsingServiceImpl;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -28,7 +29,7 @@ public class OpenLifeFile implements ActionListener {
         if (returnVal == JFileChooser.APPROVE_OPTION) {
             File file = fc.getSelectedFile();
             Charset charset = Charset.forName("US-ASCII");
-            ParseLifeFile parser = new ParseLifeFile();
+            FileParsingService parser = FileParsingService.getInstance();
 
             try (BufferedReader reader = Files.newBufferedReader(file.toPath(), charset)) {
                 InitialState initialState = parser.populateFromReader(reader);

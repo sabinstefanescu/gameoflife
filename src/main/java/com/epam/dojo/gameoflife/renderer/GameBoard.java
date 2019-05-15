@@ -1,6 +1,6 @@
 package com.epam.dojo.gameoflife.renderer;
 
-import com.epam.dojo.gameoflife.domain.GameOfLifeService;
+import com.epam.dojo.gameoflife.services.GameOfLifeService;
 
 import javax.swing.*;
 import java.awt.*;

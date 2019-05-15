@@ -1,4 +1,4 @@
-package com.epam.dojo.gameoflife.renderer;
+package com.epam.dojo.gameoflife.domain;
 
 import java.awt.Point;
 import java.util.List;

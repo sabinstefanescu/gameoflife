@@ -1,8 +1,7 @@
-package com.epam.dojo.gameoflife.parsers;
+package com.epam.dojo.gameoflife.services;
 
 
-import com.epam.dojo.gameoflife.renderer.ConwaysGameOfLife;
-import com.epam.dojo.gameoflife.renderer.InitialState;
+import com.epam.dojo.gameoflife.domain.InitialState;
 
 import java.awt.Point;
 import java.io.BufferedReader;
@@ -13,19 +12,20 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class ParseLifeFile {
+public class FileParsingServiceImpl implements FileParsingService{
 
     Pattern containsWidthDeclaration = Pattern.compile("x[ ]?=[ ]?([0-9]+)");
     Pattern containsHeightDeclaration = Pattern.compile("y[ ]?=[ ]?([0-9]+)");
     Pattern cellsLine = Pattern.compile("^[ob$0-9!]+$");
     Pattern cellGroup = Pattern.compile("(([0-9]*)(o))|(([0-9]*)(b))|(\\$)|(!)");
 
-
-    public InitialState populateFromReader(BufferedReader reader) throws IOException {
+    @Override
+    public InitialState populateFromReader(BufferedReader reader) {
         String line;
         InitialState is = new InitialState();
         StringBuilder cellDefinition = new StringBuilder();
-        while ((line = reader.readLine()) != null) {
+
+        while ((line = readLineFromReader(reader)) != null) {
             if (line.startsWith("#")) {
                 continue;
             }
@@ -47,6 +47,14 @@ public class ParseLifeFile {
         is.points = populateLivingCells(cellDefinition.toString());
 
         return is;
+    }
+
+    private String readLineFromReader(BufferedReader reader) {
+        try {
+            return reader.readLine();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     private List<Point> populateLivingCells(String cellDefinition) {

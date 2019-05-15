@@ -1,4 +1,4 @@
-package com.epam.dojo.gameoflife.domain;
+package com.epam.dojo.gameoflife.services;
 
 import java.awt.*;
 import java.util.ArrayList;
